@@ -4,7 +4,7 @@
     <Card>
       <div class="space-y-6">
         <div class="flex w-full justify-center items-center">
-          <img src="../assets/imgs/logo_alt.svg" class="w-20 text-center justify-center flex align-center self-center">
+          <h3 class="text-5xl">0rbilax</h3>
         </div>
         <div>
           <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
@@ -49,12 +49,12 @@ const mySignInHandler = async ({email, password}: { email: string, password: str
     snackbar.add({
       type: 'error',
       text: 'Sorry! Authentication failed'
-    })  } else {
+    })
+  } else {
     // No error, continue with the sign in, e.g., by following the returned redirect:
     return navigateTo(url, {external: true})
   }
 }
-
 
 
 definePageMeta({

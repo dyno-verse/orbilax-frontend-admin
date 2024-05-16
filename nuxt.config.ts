@@ -14,7 +14,7 @@ export default defineNuxtConfig({
         pageTransition: {name: 'page', mode: 'out-in'}
     },
     routeRules: {
-        '/': { redirect: '/login' },
+        '/': {redirect: '/login'},
     },
     devtools: {enabled: true},
     modules: [
@@ -32,7 +32,7 @@ export default defineNuxtConfig({
         // origin: process.env.ORIGIN,
         isEnabled: true,
         globalAppMiddleware: true,
-        origin: 'https://business.dynomenu.com',
+        origin: 'https://myshop.oriblax.com',
         token: {
             signInResponseTokenPointer: '/accessToken'
         },
