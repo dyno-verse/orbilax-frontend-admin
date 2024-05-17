@@ -31,7 +31,7 @@ export default defineNuxtPlugin(nuxtApp => {
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + token
         },
-        baseURL: "https://api.dynomenu.com",
+        baseURL: "https://api.orbilax.com",
     }
 
     /** create a new instance of $fetcher with custom option */
