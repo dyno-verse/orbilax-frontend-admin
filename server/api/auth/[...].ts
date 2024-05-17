@@ -2,7 +2,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import {NuxtAuthHandler} from '#auth'
 
 export default NuxtAuthHandler({
-    secret: "679D6A5F47765D7E",
+    secret: "679D6A5F47765D7ED",
     pages: {
         signIn: '/login',
         signOut: '/login',
@@ -46,7 +46,7 @@ export default NuxtAuthHandler({
                     headers: {
                         'Accept': 'application/json',
                     },
-                    baseURL: "https://api.dynomenu.com/",
+                    baseURL: "https://api.orbilax.com/",
                 })
                 if (data) {
                     // return data
