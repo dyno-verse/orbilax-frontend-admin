@@ -56,11 +56,12 @@ const mySignInHandler = async ({email, password}: { email: string, password: str
   }
 }
 
+// maxcofie+admin@gmail.com
 
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,
-    navigateAuthenticatedTo: '/dashboard',
+    navigateAuthenticatedTo: '/set-up',
   }
 })
 

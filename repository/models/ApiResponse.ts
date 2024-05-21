@@ -128,3 +128,29 @@ export interface ILogin {
     role: string
 }
 
+export enum ServiceTypes {
+    TAKE_OUT = 'TAKE_OUT',
+    DINE_IN = 'DINE_IN'
+}
+
+export enum PaymentTypes {
+    PAID = 'PAID',
+    UNPAID = 'UNPAID',
+}
+
+
+export interface IUser {
+    id:         string;
+    firstName:  string;
+    lastName:   string;
+    otherNames: string;
+    email:      string;
+    gender:     string;
+    businesses: Business[];
+}
+
+export interface Business {
+    id:       string;
+    name:     string;
+    branches: Branch[];
+}

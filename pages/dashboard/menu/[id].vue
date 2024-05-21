@@ -8,8 +8,6 @@
         <div class="flex flex-wrap justify-around space-x-2">
           <Button :type="ButtonTypes.Secondary" :label="'Add New Item'" data-modal-target="addCategoryItemModal"
                   data-modal-toggle="addCategoryItemModal" @click="itemModal.show()"/>
-          <Button :type="ButtonTypes.Primary" :label="'Add Category'" data-modal-target="addCategoryItemModal"
-                  data-modal-toggle="addCategoryItemModal" @click="modal.show()"/>
         </div>
 
       </div>
@@ -26,40 +24,9 @@
 
       <div>
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
-          <ul class="flex flex-wrap -mb-px text-sm font-medium text-center items-center" id="default-tab"
-              data-tabs-toggle="#default-tab-content" role="tablist"
-              data-tabs-active-classes="text-purple-600 hover:text-purple-600 dark:text-purple-500 dark:hover:text-purple-500 border-purple-600 dark:border-purple-500">
-            <li>
-              <button @click="openCategoriesModal()">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                     fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h10"/>
-                </svg>
-              </button>
-            </li>
-            <li role="presentation" v-if="menusDetails.items.length !== 0">
-              <button
-                  @click="getDetailedMenu(menuId)"
-                  class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                  id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts"
-                  aria-selected="true">Uncategorized
-              </button>
-            </li>
-
-            <li class="me-2" role="presentation" v-for="category in menusDetails.categories">
-              <button @click="getItemsByCategory(category.id)" class="inline-block p-4 border-b-2 rounded-t-lg"
-                      :id="`tab-${category.id}`"
-                      :data-tabs-target="`#tab-${category.id}`"
-                      :class="[ isSelectedCategoryId(category.id) ? 'text-red-500 border-red-500' : '']"
-                      type="button" role="tab" :aria-controls="`tab-${category.id}`" aria-selected="true">
-                {{ category.name }}
-              </button>
-            </li>
-
-          </ul>
         </div>
         <div id="default-tab-content">
-          <div class="px-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel"
+          <div class="rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel"
                aria-labelledby="profile-tab" v-if="!iscCategoryItemsLoading">
 
             <div class="flex flex-wrap w-full">
@@ -576,7 +543,7 @@ const fileInput = ref(null);
 const selectedFile = ref(null);
 
 
-const brandId = '340328b2-cec0-4c5c-ba57-37a0f33dcf66'
+const brandId = 'ea9e38c3-bafc-4383-bb14-43375b355a94'
 
 const menuId = ref("");
 const selectedCategoryId = ref("");
@@ -926,7 +893,7 @@ const getItemsByCategory = (categoryId: string) => {
 
 const pages = [
   {
-    name: 'Menu',
+    name: 'Category',
     link: '/dashboard/menu/',
     isActive: true
   } as BreadCrumbNav

@@ -2,7 +2,7 @@
   <div class="">
     <div class="flex flex-row justify-between">
       <Breadcrumb :pages="pages"/>
-      <Button :type="ButtonTypes.Primary" :label="'Add Menu'" data-modal-target="crudModal"
+      <Button :type="ButtonTypes.Primary" :label="'Add Category'" data-modal-target="crudModal"
               data-modal-toggle="crudModal" @click="modal.show()"/>
     </div>
 
@@ -30,7 +30,7 @@
             <select id="countries"
                     v-model="selectedMenu"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option selected value="">Select menu</option>
+              <option selected value="">Select Category</option>
               <option v-for="menu in menus" :value="menu.id">{{ menu.name }}</option>
             </select>
 
@@ -154,7 +154,7 @@ const crudModal = ref(null);
 
 const pages = [
   {
-    name: 'Menus',
+    name: 'Products',
     link: '/dashboard/menu/',
     isActive: true
   } as BreadCrumbNav
@@ -179,7 +179,7 @@ const addMenu = () => {
   const request: ICreateMenu = {
     name: newMenu.value.name,
     description: newMenu.value.description,
-    branchId: '340328b2-cec0-4c5c-ba57-37a0f33dcf66',
+    branchId: 'ea9e38c3-bafc-4383-bb14-43375b355a94',
     color: newMenu.value.color
   }
   //

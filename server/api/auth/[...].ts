@@ -1,5 +1,6 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import {NuxtAuthHandler} from '#auth'
+import business from "~/repository/modules/business";
 
 export default NuxtAuthHandler({
     secret: "679D6A5F47765D7ED",
@@ -15,6 +16,11 @@ export default NuxtAuthHandler({
                 token.jwt = user ? (user as any).access_token || 'a' : 'b';
                 token.id = user ? user.id || '' : '';
                 token.role = user ? (user as any).role || '' : '';
+                //
+                // if (localStorage.getItem('branchId') !== null) {
+                //     token.branchId = localStorage.getItem('branchId')
+                // }
+                token.businessName = user ? (user as any).businessName || '' : '';
                 token.businessId = user ? (user as any).businessId || '' : '';
             }
             return Promise.resolve(token);
@@ -24,6 +30,7 @@ export default NuxtAuthHandler({
             (session as any).role = token.role;
             (session as any).access_token = token.jwt;
             (session as any).businessId = token.businessId;
+            (session as any).businessName = token.businessName;
             return Promise.resolve(session);
         },
     },
@@ -55,10 +62,10 @@ export default NuxtAuthHandler({
                         email: data.email,
                         access_token: data.accessToken,
                         role: data.role,
-                        businessId: data.businesses[0].id
+                        businessId: data.businesses.filter(business => business.id === '89e5f4ff-bf99-4380-b5e1-2e4c8d055dd4')[0].id,
+                        businessName: data.businesses.filter(business => business.id === '89e5f4ff-bf99-4380-b5e1-2e4c8d055dd4')[0].name
                     };
-                }
-                else {
+                } else {
                     throw createError({
                         statusCode: 403,
                         statusMessage: "Credentials not working",

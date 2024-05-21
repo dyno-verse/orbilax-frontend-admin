@@ -47,7 +47,7 @@
                   class="mr-3 h-8"
                   alt="Dyno Logo"
               />
-              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Dyno Menu</span>
+              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{{data.businessName}}</span>
             </a>
 
             <button type="button"
@@ -109,7 +109,7 @@
                       clip-rule="evenodd"/>
               </svg>
 
-              <span class="ml-3">Menu</span>
+              <span class="ml-3">Products</span>
             </NuxtLink>
           </li>
           <li>
@@ -127,6 +127,24 @@
               <span class="ml-3">Business</span>
             </NuxtLink>
           </li>
+
+          <li>
+            <NuxtLink
+                to="/pos/orders"
+                active-class="text-red-500 bg-gray-50"
+                class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg class="w-6 h-6  dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                   fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd"
+                      d="M8 3c0-.6.4-1 1-1h6c.6 0 1 .4 1 1h2a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h2Zm6 1h-4v2H9a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2h-1V4Zm-6 8c0-.6.4-1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1 3a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z"
+                      clip-rule="evenodd"/>
+              </svg>
+
+              <span class="ml-3">Sales</span>
+            </NuxtLink>
+          </li>
+
           <li>
             <NuxtLink
                 to="/staff"
@@ -140,22 +158,6 @@
                       clip-rule="evenodd"/>
               </svg>
               <span class="ml-3">Staff</span>
-            </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink
-                to="/dashboard/operations"
-                active-class="text-red-500 bg-gray-50"
-                class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-            >
-              <svg class="w-6 h-6  dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                   fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd"
-                      d="M9.6 2.6A2 2 0 0 1 11 2h2a2 2 0 0 1 2 2l.5.3a2 2 0 0 1 2.9 0l1.4 1.3a2 2 0 0 1 0 2.9l.1.5h.1a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2l-.3.5a2 2 0 0 1 0 2.9l-1.3 1.4a2 2 0 0 1-2.9 0l-.5.1v.1a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2l-.5-.3a2 2 0 0 1-2.9 0l-1.4-1.3a2 2 0 0 1 0-2.9l-.1-.5H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2l.3-.5a2 2 0 0 1 0-2.9l1.3-1.4a2 2 0 0 1 2.9 0l.5-.1V4c0-.5.2-1 .6-1.4ZM8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z"
-                      clip-rule="evenodd"/>
-              </svg>
-
-              <span class="ml-3">Operations</span>
             </NuxtLink>
           </li>
         </ul>
