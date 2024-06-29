@@ -543,7 +543,8 @@ const fileInput = ref(null);
 const selectedFile = ref(null);
 
 
-const brandId = 'ea9e38c3-bafc-4383-bb14-43375b355a94'
+const branchId = localStorage.getItem('branchId');
+const businessId = localStorage.getItem('businessId') ?? '';
 
 const menuId = ref("");
 const selectedCategoryId = ref("");
@@ -731,7 +732,7 @@ const createCategory = () => {
     name: addCategoryData.value.name,
     description: addCategoryData.value.description,
     color: addCategoryData.value.color,
-    branchId: brandId
+    branchId: branchId ?? ''
   }
   $api.menu.createCategoryUnderMenu(request, menuId.value).then(data => {
     getDetailedMenu(menuId.value, selectedCategoryId.value);
@@ -758,7 +759,7 @@ const createCategoryItem = () => {
     position: 0,
     price: Number(addItem.value.price),
     ingredients: [],
-    branchId: brandId
+    branchId: branchId ?? ''
   }
 
   if (selectedCategoryId.value.length !== 0) {
@@ -893,7 +894,7 @@ const getItemsByCategory = (categoryId: string) => {
 
 const pages = [
   {
-    name: 'Category',
+    name: 'Products',
     link: '/dashboard/menu/',
     isActive: true
   } as BreadCrumbNav

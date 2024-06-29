@@ -8,40 +8,45 @@
 
     <div class="py-10">
       <div v-if="!isPending">
-        <div class="grid grid-cols-3 gap-4 content-start">
-          <NuxtLink :to="`/dashboard/menu/${menu.id}`" v-for="menu in menus">
-            <div class="border border-gray-300 rounded-lg p-5 px-10"
-                 :style="{backgroundColor: menu.color}">
-              <div class="flex flex-row justify-between space-x-2">
-                <div>
-                  <h4 class="font-bold text-3xl">{{ menu.name }}</h4>
-                  <p>{{ menu.description }}</p>
+        <div v-if="menus.length !== 0">
+          <div class="grid grid-cols-3 gap-4 content-start">
+            <NuxtLink :to="`/dashboard/menu/${menu.id}`" v-for="menu in menus">
+              <div class="border border-gray-300 rounded-lg p-5 px-10"
+                   :style="{backgroundColor: menu.color}">
+                <div class="flex flex-row justify-between space-x-2">
+                  <div>
+                    <h4 class="font-bold text-3xl">{{ menu.name }}</h4>
+                    <p>{{ menu.description }}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </NuxtLink>
+            </NuxtLink>
 
 
-        </div>
-
-        <div class="mt-14 w-1/3 h-full flex flex-col justify-start ">
-          <p class="text-gray-400 my-2 text-sm">This activity is very destructive</p>
-          <div class="grid grid-cols-2 items-center gap-x-2">
-            <select id="countries"
-                    v-model="selectedMenu"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option selected value="">Select Category</option>
-              <option v-for="menu in menus" :value="menu.id">{{ menu.name }}</option>
-            </select>
-
-            <button @click="deleteMenu(selectedMenu)">
-              <svg class="w-8 h-8 text-gray-300 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                   fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-              </svg>
-            </button>
           </div>
+
+          <div class="mt-14 w-1/3 h-full flex flex-col justify-start ">
+            <p class="text-gray-400 my-2 text-sm">This activity is very destructive</p>
+            <div class="grid grid-cols-2 items-center gap-x-2">
+              <select id="countries"
+                      v-model="selectedMenu"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected value="">Select Category</option>
+                <option v-for="menu in menus" :value="menu.id">{{ menu.name }}</option>
+              </select>
+
+              <button @click="deleteMenu(selectedMenu)">
+                <svg class="w-8 h-8 text-gray-300 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                     fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          <EmptyState/>
         </div>
       </div>
       <div class="w-full h-full py-48" v-else>
@@ -127,6 +132,10 @@
 <script lang="ts" setup>
 import {Dropdown, DropdownOptions, initDropdowns, initFlowbite, initModals, Modal, ModalOptions} from "flowbite";
 
+const branchId = localStorage.getItem('branchId');
+const businessId = localStorage.getItem('businessId') ?? '';
+
+
 definePageMeta({
   layout: "main",
   middleware: "auth"
@@ -179,7 +188,7 @@ const addMenu = () => {
   const request: ICreateMenu = {
     name: newMenu.value.name,
     description: newMenu.value.description,
-    branchId: 'ea9e38c3-bafc-4383-bb14-43375b355a94',
+    branchId: branchId,
     color: newMenu.value.color
   }
   //
@@ -220,7 +229,7 @@ onMounted(() => {
 
   modal.value = new Modal(crudModal.value, options);
   //Get businessId from sidebase auth
-  getBusinessById(data.value.businessId)
+  getBusinessById(businessId)
 })
 
 

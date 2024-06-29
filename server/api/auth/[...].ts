@@ -62,8 +62,8 @@ export default NuxtAuthHandler({
                         email: data.email,
                         access_token: data.accessToken,
                         role: data.role,
-                        businessId: data.businesses.filter(business => business.id === '89e5f4ff-bf99-4380-b5e1-2e4c8d055dd4')[0].id,
-                        businessName: data.businesses.filter(business => business.id === '89e5f4ff-bf99-4380-b5e1-2e4c8d055dd4')[0].name
+                        businessId: data.businesses.filter(business => business.id === '6f372ee4-92f5-42bc-814b-9f7bad7235ed')[0].id,
+                        businessName: data.businesses.filter(business => business.id === '6f372ee4-92f5-42bc-814b-9f7bad7235ed')[0].name
                     };
                 } else {
                     throw createError({

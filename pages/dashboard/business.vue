@@ -3,7 +3,7 @@
     <div class="flex flex-row justify-between h-14">
       <Breadcrumb :pages="pages"/>
       <Button :type="ButtonTypes.Primary" :label="'Save changes'" data-modal-target="categoryModal"
-              data-modal-toggle="categoryModal" @click="updateBusinessInfo('72f16ef5-6b78-4504-80bd-16aef1c52b46')"/>
+              data-modal-toggle="categoryModal" @click="updateBusinessInfo(businessId)"/>
 
     </div>
 
@@ -12,7 +12,8 @@
       <div class="flex-row flex justify-start space-x-4">
         <div class="w-3/5">
           <div class="flex flex-col">
-            <div class="w-full flex flex-row bg-blue-400 rounded-lg justify-start w-3/5 mb-2 items-center text-center relative">
+            <div
+                class="w-full flex flex-row bg-blue-400 rounded-lg justify-start w-3/5 mb-2 items-center text-center relative">
               <input type="file" ref="fileInput" class="hidden" @change="handleFileUpload">
 
               <object :data="businessInfo.bannerUrl"
@@ -218,7 +219,10 @@ import QRCode from 'qrcode';
 import html2canvas from 'html2canvas';
 import {Modal, ModalOptions} from "flowbite";
 
-const {data, signOut, getSession} = useAuth()
+// const {data, signOut, getSession} = useAuth()
+
+const branchId = localStorage.getItem('branchId');
+const businessId = localStorage.getItem('businessId') ?? '';
 
 
 const {$api} = useNuxtApp();
@@ -227,7 +231,6 @@ const isPending = ref(true)
 const snackbar = useSnackbar()
 const fileInput = ref(null)
 const selectedFile = ref(null)
-const businessId = data.value.businessId
 const qrDataUrl = ref('');
 const qrCanvas = ref(null);
 const modal = ref({})
@@ -337,7 +340,7 @@ const uploadImage = async (businessId: string) => {
 
 const generateQRCode = async () => {
   modal.value.show()
-  const data = 'https://dynomenu.com/'+businessInfo.value.slug; // Data to encode into QR code
+  const data = 'https://dynomenu.com/' + businessInfo.value.slug; // Data to encode into QR code
   try {
     const qrCanvasElement = await generateQRCodeCanvas(data);
     qrCanvas.value = qrCanvasElement;

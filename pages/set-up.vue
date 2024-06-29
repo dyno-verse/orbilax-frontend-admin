@@ -1,18 +1,37 @@
 <template>
   <div
-      class="flex flex-row p-5 w-4/5 md:w-1/2 lg:w-1/3 rounded-lg items-center border border-gray-200  mx-auto justify-center justify-items-center align-middle mt-20 h-[400px]">
+      class="w-4/5 md:w-1/2 lg:w-2/3 2xl:w-2/5 items-center  mx-auto justify-center justify-items-center align-middle mt-20">
     <Card>
-      <h3 class="text-2xl mx-1">Businesses</h3>
-      <div class="grid grid-cols-3 justify-items-center my-3">
-        <div v-for="business in user.businesses" class="text-center"
-             @click="selectedBusiness(business.branches[0].id)">
-          <div
-              class="bg-white border-gray-300 border rounded-lg p-5 flex flex-col items-center mx-1 my-1 cursor-pointer">
-            <h3 class="text-6xl">{{ getFirstTwoCharacters(business.name) }}</h3>
-          </div>
-          <p class="text-lg line-clamp-1">{{ business.name }}</p>
+      <div class="space-y-6">
+        <div class="flex w-full justify-center items-center">
+          <img src="../assets/imgs/logo_alt.svg" class="w-20 text-center justify-center flex align-center self-center">
         </div>
 
+        <h1 class="text-2xl">Select Business</h1>
+        <small class="text-gray-500">Choose a business you want to log in to</small>
+        <div v-if="!isPending" class="">
+          <div
+              @click="branchSelected(business)"
+              class="bg-gray-50 border border-gray-300 rounded-lg p-3 my-5 cursor-pointer"
+              v-for="(business,index) in user.businesses">
+            <div class="flex flex-row justify-start space-x-4">
+              <div class="h-12 w-12 bg-gray-200 rounded-lg">
+              </div>
+
+              <div>
+                <p class="text-2xl">{{ business.name }}</p>
+
+                <div class=""
+                     v-for="(branch, index) in business.branches">
+                  <p class="text-sm text-gray-500">{{ branch.name }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-full h-full py-48" v-else>
+          <Loader/>
+        </div>
       </div>
     </Card>
   </div>
@@ -24,53 +43,23 @@ import {IUser} from "~/repository/models/ApiResponse";
 const isPending = ref(true);
 const {$api} = useNuxtApp();
 const {signIn} = useAuth()
-const email = ref('')
-const password = ref('')
 const snackbar = useSnackbar();
 const user = ref({} as IUser)
-
-
-const mySignInHandler = async ({email, password}: { email: string, password: string }) => {
-  const {error, url} = await signIn('credentials', {email, password, redirect: false})
-  if (error) {
-    // Do your custom error handling here
-    snackbar.add({
-      type: 'error',
-      text: 'Sorry! Authentication failed'
-    })
-  } else {
-    // No error, continue with the sign in, e.g., by following the returned redirect:
-    return navigateTo('/dashboard', {external: true})
-  }
-}
 
 
 const getUsers = () => {
   isPending.value = true;
   $api.user.getUser().then(data => {
+    isPending.value = false;
     user.value = data.data
+
+    console.log(user.value.businesses)
   }).catch(error => {
     isPending.value = false;
 
   })
 }
-const selectedBusiness = (branchId: string) => {
-  localStorage.setItem('branchId', branchId)
-  // console.log(branchId)
-  mySignInHandler({email:'maxcofie+admin@gmail.com',password:'1234567890'})
-}
 
-function getFirstTwoCharacters(sentence: string): string {
-  const words = sentence.split(' ');
-
-  if (words.length >= 2) {
-    const firstWord = words[0].slice(0, 1);
-    const secondWord = words[1].slice(0, 1);
-    return `${firstWord}${secondWord}`.toUpperCase();
-  } else {
-    return words[0].slice(0, 2).toUpperCase();
-  }
-}
 
 definePageMeta({
   // auth: {
@@ -78,8 +67,25 @@ definePageMeta({
   //   navigateAuthenticatedTo: '/dashboard',
   // }
 })
-
 getUsers()
+
+const branchSelected = (a) => {
+  // const branch = user.value.businesses[position].branches[position];
+  localStorage.setItem('branchId', a.branches[0].id);
+  localStorage.setItem('branchName', a.branches[0].name);
+  localStorage.setItem('businessName', a.name);
+  localStorage.setItem('businessId', a.id);
+
+
+  console.log(localStorage)
+  // console.log(branch)
+
+  //
+  return navigateTo('/dashboard')
+
+}
+
+
 </script>
 
 <style scoped>
