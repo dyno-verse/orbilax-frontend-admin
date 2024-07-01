@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-10">
 
     <div v-if="!isPending">
       <div class="flex flex-row justify-between">
@@ -30,32 +30,32 @@
                aria-labelledby="profile-tab" v-if="!iscCategoryItemsLoading">
 
             <div class="flex flex-wrap w-full">
-              <div v-if="categoryItems.items.length !== 0"
-                   class="bg-white border-gray-300 border rounded-lg w-1/5 flex flex-col items-center mx-1 my-1 cursor-pointer"
-                   v-for="(item,index) in categoryItems.items" @click="viewItem(item, index)">
+              <div v-if="categoryItems.items.length !== 0" class="grid grid-cols-4 gap-4">
+                <div v-for="(item,index) in categoryItems.items" @click="viewItem(item, index)"
+                     class="bg-white border-gray-300 border rounded-lg flex flex-col items-center mx-1 my-1 cursor-pointer">
+                  <div v-if="item.imageUrl !== null" class="rounded-t-lg bg-gray-100 w-full mb-2 p-2"
+                       :style="{ backgroundColor:item.color}">
+                    <object :data="item.imageUrl"
+                            :style="{objectFit: 'contain', height: '7rem' ,width: '100%'}"
+                            class="object-cover z-10 text-center justify-center">
+                    </object>
+                  </div>
 
-                <div v-if="item.imageUrl !== null" class="rounded-t-lg bg-gray-100 w-full mb-2 p-2"
-                     :style="{ backgroundColor:item.color}">
-                  <object :data="item.imageUrl"
-                          :style="{objectFit: 'contain', height: '7rem' ,width: '100%'}"
-                          class="object-cover z-10 text-center justify-center">
-                  </object>
-                </div>
-
-                <div v-else
-                     :style="{height: '8rem' ,width: '100%', backgroundColor:item.color}"
-                     class="relative px-5 inline-flex items-center bg-gray-50 justify-center rounded-t-lg mb-2 overflow-hidden">
+                  <div v-else
+                       :style="{height: '8rem' ,width: '100%', backgroundColor:item.color}"
+                       class="relative px-5 inline-flex items-center bg-gray-50 justify-center rounded-t-lg mb-2 overflow-hidden">
                   <span
                       class="font-bold text-gray-800 text-3xl">{{
                       getFirstTwoCharacters(item.name)
                     }}</span>
-                </div>
+                  </div>
 
-                <p class="text-center px-5 text-black text-lg text-wrap text-ellipsis overflow-hidden line-clamp-1">
-                  {{ item.name }}</p>
-                <h5 class="text-center px-5 pb-5 text-black text-sm  font-extrabold">{{
-                    format('GHC', item.price)
-                  }}</h5>
+                  <p class="text-center px-5 text-black text-lg text-wrap text-ellipsis overflow-hidden line-clamp-1">
+                    {{ item.name }}</p>
+                  <h5 class="text-center px-5 pb-5 text-black text-sm  font-extrabold">{{
+                      format('GHC', item.price)
+                    }}</h5>
+                </div>
               </div>
               <EmptyState v-else/>
             </div>
@@ -184,7 +184,7 @@
                   <input type="text" name="price" id="price"
                          v-model="addItem.price"
                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                         placeholder="3.00" required="">
+                         placeholder="0.00" required="">
                 </div>
                 <div>
                   <label for="countries"

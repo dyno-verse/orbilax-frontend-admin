@@ -32,7 +32,7 @@ export default defineNuxtConfig({
         // origin: process.env.ORIGIN,
         isEnabled: true,
         globalAppMiddleware: true,
-        origin: 'https://myshop.oriblax.com',
+        origin: 'https://admin.oriblax.com',
         token: {
             signInResponseTokenPointer: '/accessToken'
         },
