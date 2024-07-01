@@ -1,0 +1,41 @@
+name: Deploy Vue To Do Droplet
+on:
+  push:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.14.x'
+          check-latest: true
+      - run: npm ci
+      - run: npm run build
+      - uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USERNAME}}
+          key: ${{secrets.SSH_KEY}}
+          source: '.output/*,package.json,*-lock.json,process-config.json'
+          target: "apps/orbilax-admin"
+          overwrite: true
+      - uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USERNAME}}
+          key: ${{secrets.SSH_KEY}}
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            
+            cd apps/orbilax-admin
+            
+            pm2 stop orbilax-admin
+            pm2 start process-config.json
