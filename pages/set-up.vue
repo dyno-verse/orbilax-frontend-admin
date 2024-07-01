@@ -3,8 +3,8 @@
       class="w-4/5 md:w-1/2 lg:w-2/3 2xl:w-2/5 items-center  mx-auto justify-center justify-items-center align-middle mt-20">
     <Card>
       <div class="space-y-6">
-        <div class="flex w-full justify-center items-center">
-          <img src="../assets/imgs/logo_alt.svg" class="w-20 text-center justify-center flex align-center self-center">
+        <div class="flex w-full justify-center items-center mb-20">
+          <h1 class="text-4xl">Orbilax</h1>
         </div>
 
         <h1 class="text-2xl">Select Business</h1>
@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="w-full h-full py-48" v-else>
-          <Loader/>
+          <Loader></Loader>
         </div>
       </div>
     </Card>
